@@ -45,17 +45,17 @@ class App extends Component {
     return (
       (
         <Router>
-            <div class='semContraste'>
+            <div className='semContraste'>
                 <Switch>
                     <Route exact path="/" component={this.state.user ? (Selecao) : (Login)} />
-                    <Route path="/cadastro/" component={Cadastro} />
-                    <Route path="/selecao/" component={Selecao} />
-                    <Route path="/sucos/" component={Sucos} />
-                    <Route path="/refrigerantes/" component={Refrigerantes} />
-                    <Route path="/salgados/" component={Salgados} />
-                    <Route path="/bolos/" component={Bolos} />
-                    <Route path="/pizzas/" component={Pizzas} />
-                    <Route path="/doces/" component={Doces} />
+                    <Route path="/cadastro" component={Cadastro} />
+                    <Route path="/selecao" component={Selecao} />
+                    <Route path="/sucos" component={Sucos} />
+                    <Route path="/refrigerantes" component={Refrigerantes} />
+                    <Route path="/salgados" component={Salgados} />
+                    <Route path="/bolos" component={Bolos} />
+                    <Route path="/pizzas" component={Pizzas} />
+                    <Route path="/doces" component={Doces} />
                 </Switch>
             </div>
         </Router>

@@ -8,54 +8,39 @@ import fire from './fire';
 export default class Login extends React.Component {
 
 	constructor(props) {
-		super(props);
-		// Login
-		this.login = this.login.bind(this);
-		this.handleChange = this.handleChange.bind(this);
-		this.signup = this.signup.bind(this);
-		this.tamanhoPadrao = 24
-		this.state = {
+    super(props);
+    this.login = this.login.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.signup = this.signup.bind(this);
+    this.state = {
 			tamanhoLetra: this.tamanhoPadrao,
 			classeContraste: 'semContraste',
 
-			email:'',
-			password:''
-		};
+      email: '',
+      password: ''
+    };
+  }
+
+  handleChange(e) {
+    this.setState({ [e.target.name]: e.target.value });
   }
 
 	// Login
-	login(e) {
-		e.preventDefault();
-		fire.auth().signInWithEmailAndPassword(this.state.email, this.state.password).then( (u) => {
-		}).catch((error) => {
-			console.log(error);
-		});
-	}
+  login(e) {
+    e.preventDefault();
+    fire.auth().signInWithEmailAndPassword(this.state.email, this.state.password).then((u)=>{
+    }).catch((error) => {
+        console.log(error);
+      });
+  }
 
-	signup(e) {
-		e.preventDefault();
-		fire.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
-		.catch((error) => {
-			console.log(error);
-		});
-	}
-
-	handleChange(e) {
-		this.setState({ [e.target.name]: e.target.value });
-	}
-
-  authListener() {
-		fire.auth().onAuthStateChanged( (user) => {
-		  console.log(user);
-		  if (user) {
-			  this.setState({ user });
-			  localStorage.setItem('user', user.uid);
-		  }
-		  else {
-			  this.setState({ user: null });
-			  localStorage.removeItem('user');
-		  }
-	  });
+  signup(e){
+    e.preventDefault();
+    fire.auth().createUserWithEmailAndPassword(this.state.email, this.state.password).then((u)=>{
+    }).then((u)=>{console.log(u)})
+    .catch((error) => {
+        console.log(error);
+      })
   }
 
 	// Acessibilidade
@@ -64,13 +49,13 @@ export default class Login extends React.Component {
 		this.setState({tamanhoLetra: this.state.tamanhoLetra+valor});
 	}else if (valor < 0  && this.state.tamanhoLetra > 15){
 		this.setState({tamanhoLetra: this.state.tamanhoLetra+valor});
-	} else if(valor == 0){
+	} else if(valor===0){
 		this.setState({tamanhoLetra: this.tamanhoPadrao});
 		}
   }
 
   moficarContraste(){
-  	if (this.state.classeContraste == "semContraste"){
+  	if (this.state.classeContraste==="semContraste"){
   		this.setState({classeContraste: "comContraste"});
   	}else{
   		this.setState({classeContraste: "semContraste"});
@@ -97,16 +82,16 @@ export default class Login extends React.Component {
 					<Form style={{marginTop:'20px'}}>
 					<FormGroup>
 					<Label for="exampleEmail" style={{fontSize: this.state.tamanhoLetra+'px'}}>Email:</Label>
-					<Input style={{fontSize: (this.state.tamanhoLetra*0.7)+'px'}} type="email" name="email" id="exampleEmail" placeholder="Digite seu Email" />
+					<Input  style={{fontSize: (this.state.tamanhoLetra*0.7)+'px'}} value={this.state.email} onChange={this.handleChange} type="email" name="email" id="exampleEmail" placeholder="Digite seu Email" />
 					</FormGroup>
 					<FormGroup>
 					<Label for="examplePassword" style={{fontSize: this.state.tamanhoLetra+'px'}}>Password:</Label>
-					<Input style={{fontSize: (this.state.tamanhoLetra*0.7)+'px'}} type="password" name="password" id="examplePassword" placeholder="Digite sua Senha" />
+					<Input style={{fontSize: (this.state.tamanhoLetra*0.7)+'px'}} value={this.state.password} onChange={this.handleChange} type="password" name="password" id="examplePassword" placeholder="Digite sua Senha" />
 					</FormGroup>
+					<Button  type="submit" onClick={this.login} color="secondary" style={{fontSize: (this.state.tamanhoLetra*0.65)+'px',textDecoration:'none',color:'white'}}>Entrar</Button>
+					<Button  onClick={this.signup} color="info" style={{fontSize: (this.state.tamanhoLetra*0.65)+'px',textDecoration:'none',color:'white'}}>Cadastrar</Button>
 					</Form>
-					<Button color="secondary"><Link to='/selecao/' style={{fontSize: (this.state.tamanhoLetra*0.65)+'px',textDecoration:'none',color:'white'}}>Entrar</Link></Button>{' '}
-					<Button  color="info"><Link to='/cadastro/' style={{fontSize: (this.state.tamanhoLetra*0.65)+'px',textDecoration:'none',color:'white'}}>Cadastrar</Link></Button>
-					
+										
 			</Container>
 			</div>
 		);
