@@ -1,5 +1,9 @@
 import React from 'react';
-import { Row,Col,Container,CardFooter,Card,FormGroup,Form,Label,Input,CardHeader, CardBody,CardImg, CardGroup,CardTitle, CardText,CardImgOverlay,Button } from 'reactstrap';
+import { Row,Col,Container,CardFooter,Card,
+	FormGroup,Form,Label,
+	Input,CardHeader,
+	CardBody,CardImg, CardGroup,CardTitle,
+	CardText,CardImgOverlay,Button } from 'reactstrap';
 import { BrowserRouter as Router, Route,Link } from 'react-router-dom';
 import TelaInicial from './TelaInicial';
 
@@ -51,10 +55,11 @@ export default class Selecao extends React.Component {
 							<CardFooter size="sm" style={{borderSize:'1px',borderColor:'black'}} className="text-muted">
 								<h5 style={{fontSize: this.state.tamanhoLetra+'px'}}>
 									Sucos
-									<Button size='sm' color="danger"  style={{fontSize: (this.state.tamanhoLetra*0.7)+'px',float:'right'}}>
-										<Link to="/sucos" style={{textDecoration:'none',color:'white'}}>Entrar</Link>
-									</Button>
 								</h5>
+								<Button size='sm' color="danger"  style={{fontSize: (this.state.tamanhoLetra*0.7)+'px',float:'right'}}>
+										<Link to="/sucos" style={{textDecoration:'none',color:'white'}}>Entrar</Link>
+								</Button>
+								
 							</CardFooter>
 						</Card>
 						<Card inverse style={{borderSize:'1px'}}>

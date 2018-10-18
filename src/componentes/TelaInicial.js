@@ -47,7 +47,7 @@ export default class TelaInicial extends React.Component {
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
               <NavItem>
-                <Link onClick={this.logout} style={{textDecoration:'none',color:'grey'}} primary as={NavLink} to="/">Logout</Link>
+                <Link onClick={this.logout} style={{textDecoration:'none',color:'grey'}} to="/"><NavLink>Logout</NavLink></Link>
               </NavItem>
               <NavItem>
                 <Link to="/pagamento" style={{textDecoration:'none',color:'grey'}}><NavLink>Pagamento</NavLink></Link>
