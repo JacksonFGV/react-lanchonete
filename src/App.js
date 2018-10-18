@@ -45,7 +45,7 @@ class App extends Component {
     return (
       (
         <Router>
-            <div class='semContraste'>
+            <div className='semContraste'>
                 <Switch>
                     <Route exact path="/" component={this.state.user ? (Selecao) : (Login)} />
                     <Route path="/cadastro/" component={Cadastro} />

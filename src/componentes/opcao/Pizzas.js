@@ -20,7 +20,7 @@ class Pizzas extends Component {
     this.setState({tamanhoLetra: this.state.tamanhoLetra+valor});
   }else if (valor < 0  && this.state.tamanhoLetra > 15){
     this.setState({tamanhoLetra: this.state.tamanhoLetra+valor});
-  } else if(valor == 0){
+  } else if(valor===0){
     this.setState({tamanhoLetra: this.tamanhoPadrao});
     }
   }
@@ -29,7 +29,7 @@ class Pizzas extends Component {
     this.setState({ collapse: !this.state.collapse });
   }
   moficarContraste(){
-    if (this.state.classeContraste == "semContraste"){
+    if (this.state.classeContraste==="semContraste"){
       this.setState({classeContraste: "comContraste"});
     }else{
       this.setState({classeContraste: "semContraste"});

@@ -1,6 +1,8 @@
 import React from 'react';
 import { Row,Col,Container,FormGroup,Form,Label,Input,Button } from 'reactstrap';
 import { BrowserRouter as Router, Route,Link } from 'react-router-dom';
+
+import fire from './fire';
 import Inicial from './Inicial';
 
 export default class Cadastro extends React.Component {
@@ -14,17 +16,25 @@ export default class Cadastro extends React.Component {
     };
   }
 
+  signup(e) {
+		e.preventDefault();
+		fire.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
+		.catch((error) => {
+			console.log(error);
+		});
+	}
+
   moficarFonte(valor){
     if(valor > 0 && this.state.tamanhoLetra < 40){
       this.setState({tamanhoLetra: this.state.tamanhoLetra+valor});
     }else if (valor < 0  && this.state.tamanhoLetra > 15){
       this.setState({tamanhoLetra: this.state.tamanhoLetra+valor});
-    } else if(valor == 0){
+    } else if(valor===0){
       this.setState({tamanhoLetra: this.tamanhoPadrao});
     }
   }
   moficarContraste(){
-    if (this.state.classeContraste == "semContraste"){
+    if (this.state.classeContraste==="semContraste"){
       this.setState({classeContraste: "comContraste"});
     }else{
       this.setState({classeContraste: "semContraste"});
