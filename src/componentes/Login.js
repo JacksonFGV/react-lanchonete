@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route,Link } from 'react-router-dom';
 import '../App.css';
 import Inicial from './Inicial';
 import fire from './fire';
+import { getTamanho, setTamanho, getContraste, setContraste } from "../DadosTemporarios";
 
 export default class Login extends React.Component {
 
@@ -11,10 +12,11 @@ export default class Login extends React.Component {
     super(props);
     this.login = this.login.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.signup = this.signup.bind(this);
+		this.signup = this.signup.bind(this);
+		this.tamanhoPadrao = 24;
     this.state = {
 			tamanhoLetra: this.tamanhoPadrao,
-			classeContraste: 'semContraste',
+			classeContraste: getContraste(),
 
       email: '',
       password: ''
@@ -45,21 +47,21 @@ export default class Login extends React.Component {
 
 	// Acessibilidade
   moficarFonte(valor){
-	if(valor > 0 && this.state.tamanhoLetra < 40){
-		this.setState({tamanhoLetra: this.state.tamanhoLetra+valor});
-	}else if (valor < 0  && this.state.tamanhoLetra > 15){
-		this.setState({tamanhoLetra: this.state.tamanhoLetra+valor});
-	} else if(valor===0){
-		this.setState({tamanhoLetra: this.tamanhoPadrao});
-		}
+		if(valor > 0 && this.state.tamanhoLetra < 40){
+			this.setState({tamanhoLetra: this.state.tamanhoLetra+valor});
+			setTamanho(this.state.tamanhoLetra+valor);
+    }else if (valor < 0  && this.state.tamanhoLetra > 15){
+			this.setState({tamanhoLetra: this.state.tamanhoLetra+valor});
+			setTamanho(this.state.tamanhoLetra+valor);
+    } else if(valor == 0){
+			this.setState({tamanhoLetra: this.tamanhoPadrao});
+			setTamanho(this.state.tamanhoLetra+valor);
+    }
   }
 
   moficarContraste(){
-  	if (this.state.classeContraste==="semContraste"){
-  		this.setState({classeContraste: "comContraste"});
-  	}else{
-  		this.setState({classeContraste: "semContraste"});
-  	}
+  	setContraste()
+		this.setState({ classeContraste: getContraste()})
   }
 
   render() {

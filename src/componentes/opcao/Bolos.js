@@ -3,33 +3,34 @@ import { Badge } from 'reactstrap';
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route,Link } from 'react-router-dom';
 import { Collapse, Button, CardBody, Card,Container,CardImg,CardGroup,CardFooter,Input,Label,FormGroup } from 'reactstrap';
+import { getTamanho, setTamanho, getContraste, setContraste } from "../../DadosTemporarios";
 
 class Bolos extends Component {
 	constructor(props) {
 		super(props);
-		this.tamanhoPadrao = 24
 		this.toggle = this.toggle.bind(this);
+		this.tamanhoPadrao = getTamanho();
 		this.state = { collapse: false,
 			tamanhoLetra: this.tamanhoPadrao,
-			classeContraste: 'semContraste'
+			classeContraste: getContraste()
 		};
 	}
 
 	moficarFonte(valor){
 		if(valor > 0 && this.state.tamanhoLetra < 40){
 			this.setState({tamanhoLetra: this.state.tamanhoLetra+valor});
+			setTamanho(this.state.tamanhoLetra+valor);
 		}else if (valor < 0  && this.state.tamanhoLetra > 15){
 			this.setState({tamanhoLetra: this.state.tamanhoLetra+valor});
-		} else if(valor===0){
+			setTamanho(this.state.tamanhoLetra+valor);
+		}else if(valor == 0){
 			this.setState({tamanhoLetra: this.tamanhoPadrao});
+			setTamanho(this.state.tamanhoLetra+valor);
 		}
 	}
 	moficarContraste(){
-	  	if (this.state.classeContraste==="semContraste"){
-	  		this.setState({classeContraste: "comContraste"});
-	  	}else{
-	  		this.setState({classeContraste: "semContraste"});
-	  	}
+		setContraste()
+		this.setState({ classeContraste: getContraste()})
  	}
 
 

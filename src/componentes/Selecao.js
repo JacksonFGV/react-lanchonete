@@ -5,34 +5,35 @@ import { Row,Col,Container,CardFooter,Card,
 	CardBody,CardImg, CardGroup,CardTitle,
 	CardText,CardImgOverlay,Button } from 'reactstrap';
 import { BrowserRouter as Router, Route,Link } from 'react-router-dom';
+import { getTamanho, getContraste, setContraste, setTamanho } from "../DadosTemporarios";
 import TelaInicial from './TelaInicial';
 
 export default class Selecao extends React.Component {
 	constructor(props) {
     super(props);
-    this.tamanhoPadrao = 20
+    this.tamanhoPadrao = 24;
     this.state = {
     	tamanhoLetra: this.tamanhoPadrao,
-		classeContraste: 'semContraste'
+		classeContraste: getContraste()
     };
   }
 
   moficarFonte(valor){
     if(valor > 0 && this.state.tamanhoLetra < 40){
-      this.setState({tamanhoLetra: this.state.tamanhoLetra+valor});
-    }else if (valor < 0  && this.state.tamanhoLetra > 15){
-      this.setState({tamanhoLetra: this.state.tamanhoLetra+valor});
-    } else if(valor===0){
-      this.setState({tamanhoLetra: this.tamanhoPadrao});
-    }
+		this.setState({tamanhoLetra: this.state.tamanhoLetra+valor});
+		setTamanho(this.state.tamanhoLetra+valor);
+	}else if (valor < 0  && this.state.tamanhoLetra > 15){
+			this.setState({tamanhoLetra: this.state.tamanhoLetra+valor});
+			setTamanho(this.state.tamanhoLetra+valor);
+	} else if(valor == 0){
+			this.setState({tamanhoLetra: this.tamanhoPadrao});
+			setTamanho(this.state.tamanhoLetra+valor);
+	}
   }
 
   moficarContraste(){
-  	if (this.state.classeContraste==="semContraste"){
-  		this.setState({classeContraste: "comContraste"});
-  	}else{
-  		this.setState({classeContraste: "semContraste"});
-  	}
+	setContraste()
+	this.setState({ classeContraste: getContraste()})
   }
 
   render(){
@@ -55,11 +56,11 @@ export default class Selecao extends React.Component {
 							<CardFooter size="sm" style={{borderSize:'1px',borderColor:'black'}} className="text-muted">
 								<h5 style={{fontSize: this.state.tamanhoLetra+'px'}}>
 									Sucos
-								</h5>
+								
 								<Button size='sm' color="danger"  style={{fontSize: (this.state.tamanhoLetra*0.7)+'px',float:'right'}}>
 										<Link to="/sucos" style={{textDecoration:'none',color:'white'}}>Entrar</Link>
 								</Button>
-								
+								</h5>
 							</CardFooter>
 						</Card>
 						<Card inverse style={{borderSize:'1px'}}>
