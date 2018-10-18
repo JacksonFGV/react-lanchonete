@@ -10,13 +10,18 @@ import {
   UncontrolledDropdown,
   DropdownToggle,
   DropdownMenu,
-  DropdownItem } from 'reactstrap';
+  DropdownItem,
+  Button } from 'reactstrap';
 import { BrowserRouter as Router, Route,Link } from 'react-router-dom';
 
+import fire from './fire';
+
 export default class TelaInicial extends React.Component {
+
   constructor(props) {
     super(props);
 
+    this.logout = this.logout.bind(this);
     this.toggle = this.toggle.bind(this);
     this.state = {
       isOpen: false
@@ -27,6 +32,12 @@ export default class TelaInicial extends React.Component {
       isOpen: !this.state.isOpen
     });
   }
+
+  logout() {
+    console.log("Logout!!");
+    fire.auth().signOut();
+  }
+
   render() {
     return (
       <div>
@@ -36,7 +47,7 @@ export default class TelaInicial extends React.Component {
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
               <NavItem>
-                <Link to="/" style={{textDecoration:'none',color:'grey'}}><NavLink>Logout</NavLink></Link>
+                <Link onClick={this.logout} style={{textDecoration:'none',color:'grey'}} primary as={NavLink} to="/">Logout</Link>
               </NavItem>
               <NavItem>
                 <Link to="/pagamento" style={{textDecoration:'none',color:'grey'}}><NavLink>Pagamento</NavLink></Link>
